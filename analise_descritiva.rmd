@@ -1,0 +1,220 @@
+---
+title: "Centro de Estatística Aplicada"
+author: |
+  | Gustavo Kanno\thanks{Número USP: 9795810} 
+  | Rodrigo Marcel Araujo\thanks{Número USP: 9299208}
+  | Victor Ribeiro Baião Decanini\thanks{Número USP: 9790502}
+date: "`r stringr::str_to_sentence(format(Sys.time(), '%B de %Y'))`"
+lang: pt-BR
+header-includes:
+  # - \usepackage[brazilian]{babel}
+  - \usepackage{float}
+  - \usepackage{amsmath}
+  - \usepackage{amsthm}
+  - \floatplacement{figure}{H}
+  - \usepackage{indentfirst}
+  - \setlength{\parindent}{4em}
+  - \setlength{\parskip}{1em}
+  - \usepackage{booktabs}
+  - \usepackage{dcolumn}
+  - \usepackage{bm}
+  - \usepackage{titling}
+  - \thanksmarkseries{arabic} % \thanks footnotes com numeros
+  - \usepackage[bottom]{footmisc} % corrige posição footnotes
+  - \usepackage{pdfpages}
+  - \usepackage{tocloft}
+  - \renewcommand{\cftsecleader}{\cftdotfill{\cftdotsep}}
+  - \usepackage{amssymb}
+  - \renewcommand\qedsymbol{$\blacksquare$}
+  - \usepackage{cleveref}
+  - \usepackage{subfig}
+output: 
+  pdf_document: 
+    fig_caption: yes
+    number_sections: no
+    toc: true
+    toc_depth: 2
+editor_options: 
+  chunk_output_type: console
+---
+
+\pagebreak
+
+\newcommand\invisiblesection[1]{%
+  \refstepcounter{section}%
+  \addcontentsline{toc}{section}{#1}%
+  \sectionmark{#1}}
+  
+<!-- \newcommand\invisiblesection[1]{% -->
+<!--   \refstepcounter{section}% -->
+<!--   \addcontentsline{toc}{section}{\protect\numberline{\thesection}#1}% -->
+<!--   \sectionmark{#1}} -->
+
+<!-- \newcommand\invisiblessection[1]{% -->
+<!--   \refstepcounter{subsection}% -->
+<!--   \addcontentsline{toc}{subsection}{\protect\numberline{\thesection}#1}% -->
+<!--   \sectionmark{#1}} -->
+
+
+```{r setup, include=FALSE}
+# paramentros padrao para os plots
+knitr::opts_chunk$set(fig.width = '\\textwidth',
+                      fig.align = 'center',
+                      out.width = "\\textwidth",
+                      warning = FALSE, echo = TRUE)
+
+
+library(robustbase)
+library(knitr)
+library(stargazer)
+library(tidyverse)
+library(gamlss)
+library(car)
+library(readxl)
+library(MASS)
+library(gridExtra)
+library(ggplot2)
+library(faraway)
+```
+
+
+```{r , include=FALSE}
+require(BatchGetSymbols)
+require(Amelia)
+require(reshape2)
+require(ggthemes) 
+require(plyr)
+library(ggplot2)
+```
+
+```{r , include=FALSE}
+
+suppressMessages(library(foreign))
+suppressMessages(library(dynlm))
+suppressMessages(library(car))
+suppressMessages(library(lmtest))
+suppressMessages(library(sandwich))
+suppressMessages(library(fpp2))
+suppressMessages(library(tseries))
+suppressMessages(library(zoo))
+suppressMessages(library(forecast))
+library(BETS)
+library(quantmod)
+library(fpp2)
+library(GeneCycle)
+```
+
+<!-- \invisiblesection{Exercício 1} -->
+<!-- \includepdf[pages=-]{Q1.pdf} -->
+
+
+
+
+
+```{r , include=FALSE}
+library(forecast)
+library(randtests)
+library(zoo)
+library(TSA)
+library(gridExtra)
+library(FitAR)  
+```
+
+
+```{r, include=FALSE}
+setwd("C:\\Users\\Rodrigo Araujo\\Documents\\IME-USP\\CEA 1\\dados")
+```
+
+
+
+# Análise Descritiva
+
+
+
+```{r}
+setwd("C:\\Users\\Rodrigo Araujo\\Documents\\IME-USP\\CEA 1\\dados")
+data = read_xlsx("IPCA_DADOS_AGRUPADOS.xlsx", sheet = 1)
+head(data)
+```
+
+
+
+
+
+
+
+```{r}
+zt0 <- ts(data[,2], frequency = 12, start = 2007, end = 2019)
+zt1 <- ts(data[,3], frequency = 12, start = 2007, end = 2019)
+zt2 <- ts(data[,4], frequency = 12, start = 2007, end = 2019)
+zt3 <- ts(data[,5], frequency = 12, start = 2007, end = 2019)
+zt4 <- ts(data[,6], frequency = 12, start = 2007, end = 2019)
+zt5 <- ts(data[,7], frequency = 12, start = 2007, end = 2019)
+zt6 <- ts(data[,8], frequency = 12, start = 2007, end = 2019)
+zt7 <- ts(data[,9], frequency = 12, start = 2007, end = 2019)
+zt8 <- ts(data[,10], frequency = 12, start = 2007, end = 2019)
+zt9 <- ts(data[,11], frequency = 12, start = 2007, end = 2019)
+
+zt10 <- ts(data[,12], frequency = 12, start = 2007, end = 2019)
+zt11 <- ts(data[,13], frequency = 12, start = 2007, end = 2019)
+zt12 <- ts(data[,14], frequency = 12, start = 2007, end = 2019)
+zt13 <- ts(data[,15], frequency = 12, start = 2007, end = 2019)
+zt14 <- ts(data[,16], frequency = 12, start = 2007, end = 2019)
+zt15 <- ts(data[,17], frequency = 12, start = 2007, end = 2019)
+zt16 <- ts(data[,18], frequency = 12, start = 2007, end = 2019)
+zt17 <- ts(data[,19], frequency = 12, start = 2007, end = 2019)
+zt18 <- ts(data[,20], frequency = 12, start = 2007, end = 2019)
+zt19 <- ts(data[,21], frequency = 12, start = 2007, end = 2019)
+zt20 <- ts(data[,22], frequency = 12, start = 2007, end = 2019)
+zt21 <- ts(data[,23], frequency = 12, start = 2007, end = 2019)
+zt22 <- ts(data[,24], frequency = 12, start = 2007, end = 2019)
+     
+```
+
+```{r}
+plot(zt0,main="Série Temporal do Arroz", xlab= "Anos", ylab="IPCA")
+par(mfrow = c(2, 2))
+plot(zt1,main="Série Temporal de Avicultura de Corte", xlab= "Anos", ylab="IPCA")
+plot(zt2,main="Série Temporal de Avicultura de Postura", xlab= "Anos", ylab="IPCA")
+plot(zt3,main="Série Temporal da Banana", xlab= "Anos", ylab="IPCA")
+plot(zt4,main="Série Temporal da Batata", xlab= "Anos", ylab="IPCA")
+```
+
+```{r}
+
+par(mfrow = c(3, 2))
+
+
+plot(zt5,main="Série Temporal da Bovinocultura", xlab= "Anos", ylab="IPCA")
+plot(zt6,main="Série Temporal do Cacau e Produtos", xlab= "Anos", ylab="IPCA")
+plot(zt7,main="Série Temporal do Café", xlab= "Anos", ylab="IPCA")
+plot(zt8,main="Série Temporal da Cebola", xlab= "Anos", ylab="IPCA")
+plot(zt9,main="Série Temporal do Complexo Soja", xlab= "Anos", ylab="IPCA")
+plot(zt10,main="Série Temporal do Complexo Sucroalc.", xlab= "Anos", ylab="IPCA")
+```
+
+```{r}
+
+par(mfrow = c(3, 2))
+
+
+plot(zt11,main="Série Temporal do Feijão", xlab= "Anos", ylab="IPCA")
+plot(zt12,main="Série Temporal das Frutas", xlab= "Anos", ylab="IPCA")
+plot(zt13,main="Série Temporal das Horticulas", xlab= "Anos", ylab="IPCA")
+plot(zt14,main="Série Temporal de Indefinido", xlab= "Anos", ylab="IPCA")
+plot(zt15,main="Série Temporal do Lácteos", xlab= "Anos", ylab="IPCA")
+plot(zt16,main="Série Temporal da Laranja e Citrus", xlab= "Anos", ylab="IPCA")
+```
+
+```{r}
+
+par(mfrow = c(3, 2))
+
+
+plot(zt17,main="Série Temporal da Mandioca", xlab= "Anos", ylab="IPCA")
+plot(zt18,main="Série Temporal do Milho", xlab= "Anos", ylab="IPCA")
+plot(zt19,main="Série Temporal do Pescado", xlab= "Anos", ylab="IPCA")
+plot(zt20,main="Série Temporal da Suínocultura", xlab= "Anos", ylab="IPCA")
+plot(zt21,main="Série Temporal do Tomate", xlab= "Anos", ylab="IPCA")
+plot(zt22,main="Série Temporal do Trigo", xlab= "Anos", ylab="IPCA")
+```
