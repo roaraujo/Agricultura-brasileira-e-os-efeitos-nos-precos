@@ -1,1 +1,1 @@
-# Centro-de-Estat-stica-Aplicada---IME-USP---Econometria-
+# Centro-de-Estatística-Aplicada-IME-USP-Econometria
