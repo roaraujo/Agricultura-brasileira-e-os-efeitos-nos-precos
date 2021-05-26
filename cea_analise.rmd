@@ -132,15 +132,15 @@ setwd("C:\\Users\\Rodrigo Araujo\\Documents\\IME-USP\\CEA 1\\dados")
 
 
 ```{r}
+#setwd("C:\\Users\\Rodrigo Araujo\\Documents\\IME-USP\\CEA 1\\dados")
+#data = read_xlsx("IPCA_DADOS_AGRUPADOS.xlsx", sheet = 1)
+
 setwd("C:\\Users\\Rodrigo Araujo\\Documents\\IME-USP\\CEA 1\\dados")
 data = read_xlsx("IPCA_DADOS_AGRUPADOS.xlsx", sheet = 1)
+
+data$Data <- as.Date(data$Data)
 head(data)
 ```
-
-
-
-
-
 
 
 ```{r}
@@ -218,3 +218,192 @@ plot(zt20,main="Série Temporal da Suínocultura", xlab= "Anos", ylab="IPCA")
 plot(zt21,main="Série Temporal do Tomate", xlab= "Anos", ylab="IPCA")
 plot(zt22,main="Série Temporal do Trigo", xlab= "Anos", ylab="IPCA")
 ```
+
+
+
+
+```{r}
+par(mfrow = c(2, 1))
+plot(zt19,main="Série Temporal do Pescado", xlab= "Anos", ylab="IPCA")
+plot(zt15,main="Série Temporal do Lácteos", xlab= "Anos", ylab="IPCA")
+#900#650
+```
+
+
+```{r}
+par(mfrow = c(2, 1))
+plot(zt5,main="Série Temporal da Bovinocultura", xlab= "Anos", ylab="IPCA")
+plot(zt20,main="Série Temporal da Suínocultura", xlab= "Anos", ylab="IPCA")
+
+```
+
+
+```{r}
+par(mfrow = c(2, 1))
+plot(zt1,main="Série Temporal de Avicultura de Corte", xlab= "Anos", ylab="IPCA")
+plot(zt2,main="Série Temporal de Avicultura de Postura", xlab= "Anos", ylab="IPCA")
+
+```
+
+
+
+# Funções de Autocorrelações
+
+```{r}
+par(mfrow = c(1, 2))
+acf(zt1, main="ACF Avicultura de Corte")
+pacf(zt1, main="PACF Avicultura de Corte")
+```
+
+
+```{r}
+par(mfrow = c(1, 2))
+acf(zt2, main="ACF Avicultura de Postura")
+pacf(zt2, main="PACF Avicultura de Postura")
+```
+
+
+```{r}
+par(mfrow = c(1, 2))
+acf(zt20, main="ACF Suínocultura")
+pacf(zt20, main="PACF Suínocultura")
+```
+
+
+```{r}
+par(mfrow = c(1, 2))
+acf(zt19, main="ACF Pescado")
+pacf(zt19, main="PACF Pescado")
+```
+
+```{r}
+par(mfrow = c(1, 2))
+acf(zt15, main="ACF Lácteos")
+pacf(zt15, main="PACF Lácteos")
+```
+
+
+```{r}
+par(mfrow = c(1, 2))
+acf(zt5, main="ACF Bovinocultura")
+pacf(zt5, main="PACF Bovinocultura")
+```
+
+
+
+
+
+
+
+# Análise Correlação Cruzada  
+
+
+
+```{r}
+#Correlaões cruzadas da Bovincultura
+par(mfrow = c(3,2))
+acf(zt5,main="ACF Bovinocultura")
+ccf(zt5,zt1,main="Bovinocultura e Avicultura de Corte")
+ccf(zt5,zt2,main="Bovinocultura e Avicultura de Postura")
+ccf(zt5,zt15,main="Bovinocultura e Lácteos")
+ccf(zt5,zt19,main="Bovinocultura e Pescados")
+ccf(zt0,zt20,main="Bovinocultura e Suinocultura")
+```
+
+```{r}
+
+#Correlações cruzadas da Avicultura de Corte
+par(mfrow = c(3,2))
+acf(zt1,main="ACF Avicultura de Corte")
+ccf(zt1,zt2,main="Avivultura de Corte e Avicultura de Postura")
+ccf(zt1,zt3,main="Avicultura de Corte e Bovinocultura")
+ccf(zt1,zt5,main="Avicultura de Corte e Lácteos")
+ccf(zt1,zt19,main="Avicultura de Corte e Pescados")
+ccf(zt1,zt20,main="Avicultura de Corte e Suinocultura")
+
+```
+
+```{r}
+
+#Correlações cruzadas da Avicultura de Postura
+par(mfrow = c(3,2))
+acf(zt2,main="ACF Avicultura de Postura")
+ccf(zt2,zt1,main="Avicultura de Postura e Avicultura de Corte")
+ccf(zt2,zt5,main="Avicultura de Postura e Bovinocultura")
+ccf(zt2,zt15,main="Avicultura de Postura e Lácteos")
+ccf(zt2,zt19,main="Avicultura de Postura e Pescados")
+ccf(zt2,zt20,main="Avicultura de Postura e Suinocultura")
+```
+
+```{r}
+#Correlações cruzadas dos Lácteos
+par(mfrow = c(3,2))
+acf(zt15,main="ACF Lácteos")
+ccf(zt15,zt1,main="Lácteos e Avicultura de Corte")
+ccf(zt15,zt2,main="Lácteos e Avicultura de Postura ")
+ccf(zt15,zt5,main="Lácteos e Bovinocultura")
+ccf(zt15,zt19,main="Lácteos e Pescados")
+ccf(zt15,zt20,main="Lácteos e Suinocultura")
+```
+
+```{r}
+# Correlaões cruzadas dos Pescados
+par(mfrow = c(3,2))
+acf(zt19,main="ACF Pescados")
+ccf(zt19,zt1,main="Pescados e Avicultura de Corte")
+ccf(zt19,zt2,main="Pescados e Avicultura de Postura")
+ccf(zt19,zt5,main="Pescados e Bovinocultura")
+ccf(zt19,zt15,main="Pescados e Lácteos")
+ccf(zt19,zt20,main="Pescados e Suinocultura")
+```
+
+```{r}
+
+#Correlações cruzadas da Suinocultura
+par(mfrow = c(3,2))
+acf(zt20,main="ACF Suinocultura")
+ccf(zt20,zt1,main="Suinocultura e Avicultura de Corte")
+ccf(zt20,zt2,main="Suinocultura e Avicultura de Postura")
+ccf(zt20,zt5,main="Suinocultura e Bovinocultura")
+ccf(zt20,zt15,main="Suinocultura e Lacteos")
+ccf(zt20,zt19,main="Suinocultura e Pescados")
+```
+
+
+
+
+# Regressão LASSO
+
+```{r}
+library(glmnet)
+set.seed(123) 
+x <-subset(data, select = c("Lácteos", "Pescado", "Suinocultura", "Avicultura de Postura", "Avicultura de Corte", "Bovinocultura"))
+
+x = model.matrix(Bovinocultura~.,x)[,-1]
+y = data$Bovinocultura
+
+cv.lasso <- cv.glmnet(x, y, alpha = 1, family = "gaussian")
+print(cv.lasso)
+plot(cv.lasso)
+cv.lasso$lambda.min
+cv.lasso$lambda.1se
+coef(cv.lasso, cv.lasso$lambda.min)
+coef(cv.lasso, cv.lasso$lambda.1se)
+```
+
+
+# Regressão RIDGE
+
+
+```{r}
+set.seed(1234) 
+
+cv.ridge <- cv.glmnet(x, y, alpha = 0, family = "gaussian")
+print(cv.ridge)
+plot(cv.ridge)
+cv.ridge$lambda.min
+cv.ridge$lambda.1se
+coef(cv.ridge, cv.lasso$lambda.min)
+coef(cv.ridge, cv.lasso$lambda.1se)
+```
+
