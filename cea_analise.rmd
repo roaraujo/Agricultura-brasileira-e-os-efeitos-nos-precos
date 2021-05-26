@@ -403,7 +403,7 @@ print(cv.ridge)
 plot(cv.ridge)
 cv.ridge$lambda.min
 cv.ridge$lambda.1se
-coef(cv.ridge, cv.lasso$lambda.min)
-coef(cv.ridge, cv.lasso$lambda.1se)
+coef(cv.ridge, cv.ridge$lambda.min)
+coef(cv.ridge, cv.ridge$lambda.1se)
 ```
 
