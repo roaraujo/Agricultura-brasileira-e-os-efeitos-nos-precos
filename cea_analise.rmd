@@ -377,8 +377,7 @@ ccf(zt20,zt19,main="Suinocultura e Pescados")
 ```{r}
 library(glmnet)
 set.seed(123) 
-x <-subset(data, select = c("Lácteos", "Pescado", "Suinocultura", "Avicultura de Postura", "Avicultura de Corte", "Bovinocultura"))
-
+x <- data[,-1]
 x = model.matrix(Bovinocultura~.,x)[,-1]
 y = data$Bovinocultura
 
@@ -392,8 +391,8 @@ coef(cv.lasso, cv.lasso$lambda.1se)
 ```
 
 
-# Regressão RIDGE
 
+# Regressão RIDGE
 
 ```{r}
 set.seed(1234) 
