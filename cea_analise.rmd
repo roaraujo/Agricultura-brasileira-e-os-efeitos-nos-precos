@@ -371,15 +371,50 @@ ccf(zt20,zt19,main="Suinocultura e Pescados")
 
 
 
+```{r}
+combinar = function(df,coluna,nome,lag){
+  n = nrow(df)
+  pre = rep(NA,lag)
+  newcol = c(pre,coluna)
+  for (k in 1:lag){
+    df = rbind(df,rep(NA,ncol(df)))
+  }
+  df[nome] = newcol
+  return (df)
+}
+
+```
+
+
+```{r}
+
+data_cut = data[,c("Bovinocultura","Avicultura de Corte","Avicultura de Postura","Pescado","Lácteos","Suinocultura")]
+
+
+
+df1<- combinar(data_cut, data_cut$`Avicultura de Postura`, 'avp9', 9)
+df1 <- combinar(df1, df1$`Lácteos`, 'l1', 1)
+df1 <- combinar(df1, df1$`Lácteos`, 'l2', 2)
+df1 <- combinar(df1, df1$`Lácteos`, 'l6', 6)
+df1 <- combinar(df1, df1$Pescado, 'p3', 3)
+df1 <- combinar(df1, df1$Pescado, 'p10', 10)
+df1 <- combinar(df1, df1$Bovinocultura, 'b1', 1)
+```
+
+```{r}
+
+df2 <- na.omit(df1)
+```
+
 
 # Regressão LASSO
 
 ```{r}
 library(glmnet)
 set.seed(123) 
-x <- data[,-1]
+x <- df2[,]
 x = model.matrix(Bovinocultura~.,x)[,-1]
-y = data$Bovinocultura
+y = df2$Bovinocultura
 
 cv.lasso <- cv.glmnet(x, y, alpha = 1, family = "gaussian")
 print(cv.lasso)
