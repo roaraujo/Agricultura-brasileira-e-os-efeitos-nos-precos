@@ -144,40 +144,40 @@ head(data)
 
 
 ```{r}
-zt0 <- ts(data[,2], frequency = 12, start = 2007, end = 2019)
-zt1 <- ts(data[,3], frequency = 12, start = 2007, end = 2019)
-zt2 <- ts(data[,4], frequency = 12, start = 2007, end = 2019)
-zt3 <- ts(data[,5], frequency = 12, start = 2007, end = 2019)
-zt4 <- ts(data[,6], frequency = 12, start = 2007, end = 2019)
-zt5 <- ts(data[,7], frequency = 12, start = 2007, end = 2019)
-zt6 <- ts(data[,8], frequency = 12, start = 2007, end = 2019)
-zt7 <- ts(data[,9], frequency = 12, start = 2007, end = 2019)
-zt8 <- ts(data[,10], frequency = 12, start = 2007, end = 2019)
-zt9 <- ts(data[,11], frequency = 12, start = 2007, end = 2019)
+zt2 <- ts(data[,2], frequency = 12, start = 2007, end = 2019)
+zt3 <- ts(data[,3], frequency = 12, start = 2007, end = 2019)
+zt4 <- ts(data[,4], frequency = 12, start = 2007, end = 2019)
+zt5 <- ts(data[,5], frequency = 12, start = 2007, end = 2019)
+zt6 <- ts(data[,6], frequency = 12, start = 2007, end = 2019)
+zt7 <- ts(data[,7], frequency = 12, start = 2007, end = 2019)
+zt8 <- ts(data[,8], frequency = 12, start = 2007, end = 2019)
+zt9 <- ts(data[,9], frequency = 12, start = 2007, end = 2019)
+zt10 <- ts(data[,10], frequency = 12, start = 2007, end = 2019)
+zt11 <- ts(data[,11], frequency = 12, start = 2007, end = 2019)
 
-zt10 <- ts(data[,12], frequency = 12, start = 2007, end = 2019)
-zt11 <- ts(data[,13], frequency = 12, start = 2007, end = 2019)
-zt12 <- ts(data[,14], frequency = 12, start = 2007, end = 2019)
-zt13 <- ts(data[,15], frequency = 12, start = 2007, end = 2019)
-zt14 <- ts(data[,16], frequency = 12, start = 2007, end = 2019)
-zt15 <- ts(data[,17], frequency = 12, start = 2007, end = 2019)
-zt16 <- ts(data[,18], frequency = 12, start = 2007, end = 2019)
-zt17 <- ts(data[,19], frequency = 12, start = 2007, end = 2019)
-zt18 <- ts(data[,20], frequency = 12, start = 2007, end = 2019)
-zt19 <- ts(data[,21], frequency = 12, start = 2007, end = 2019)
-zt20 <- ts(data[,22], frequency = 12, start = 2007, end = 2019)
-zt21 <- ts(data[,23], frequency = 12, start = 2007, end = 2019)
-zt22 <- ts(data[,24], frequency = 12, start = 2007, end = 2019)
+zt12 <- ts(data[,12], frequency = 12, start = 2007, end = 2019)
+zt13 <- ts(data[,13], frequency = 12, start = 2007, end = 2019)
+zt14 <- ts(data[,14], frequency = 12, start = 2007, end = 2019)
+zt15 <- ts(data[,15], frequency = 12, start = 2007, end = 2019)
+zt16 <- ts(data[,16], frequency = 12, start = 2007, end = 2019)
+zt17 <- ts(data[,17], frequency = 12, start = 2007, end = 2019)
+zt18 <- ts(data[,18], frequency = 12, start = 2007, end = 2019)
+zt19 <- ts(data[,19], frequency = 12, start = 2007, end = 2019)
+zt20 <- ts(data[,20], frequency = 12, start = 2007, end = 2019)
+zt21 <- ts(data[,21], frequency = 12, start = 2007, end = 2019)
+zt22 <- ts(data[,22], frequency = 12, start = 2007, end = 2019)
+zt23 <- ts(data[,23], frequency = 12, start = 2007, end = 2019)
+zt24 <- ts(data[,24], frequency = 12, start = 2007, end = 2019)
      
 ```
 
 ```{r}
-plot(zt0,main="Série Temporal do Arroz", xlab= "Anos", ylab="IPCA")
+plot(zt2,main="Série Temporal do Arroz", xlab= "Anos", ylab="IPCA")
 par(mfrow = c(2, 2))
-plot(zt1,main="Série Temporal de Avicultura de Corte", xlab= "Anos", ylab="IPCA")
-plot(zt2,main="Série Temporal de Avicultura de Postura", xlab= "Anos", ylab="IPCA")
-plot(zt3,main="Série Temporal da Banana", xlab= "Anos", ylab="IPCA")
-plot(zt4,main="Série Temporal da Batata", xlab= "Anos", ylab="IPCA")
+plot(zt3,main="Série Temporal de Avicultura de Corte", xlab= "Anos", ylab="IPCA")
+plot(zt4,main="Série Temporal de Avicultura de Postura", xlab= "Anos", ylab="IPCA")
+plot(zt5,main="Série Temporal da Banana", xlab= "Anos", ylab="IPCA")
+plot(zt6,main="Série Temporal da Batata", xlab= "Anos", ylab="IPCA")
 ```
 
 ```{r}
@@ -185,12 +185,12 @@ plot(zt4,main="Série Temporal da Batata", xlab= "Anos", ylab="IPCA")
 par(mfrow = c(3, 2))
 
 
-plot(zt5,main="Série Temporal da Bovinocultura", xlab= "Anos", ylab="IPCA")
-plot(zt6,main="Série Temporal do Cacau e Produtos", xlab= "Anos", ylab="IPCA")
-plot(zt7,main="Série Temporal do Café", xlab= "Anos", ylab="IPCA")
-plot(zt8,main="Série Temporal da Cebola", xlab= "Anos", ylab="IPCA")
-plot(zt9,main="Série Temporal do Complexo Soja", xlab= "Anos", ylab="IPCA")
-plot(zt10,main="Série Temporal do Complexo Sucroalc.", xlab= "Anos", ylab="IPCA")
+plot(zt7,main="Série Temporal da Bovinocultura", xlab= "Anos", ylab="IPCA")
+plot(zt8,main="Série Temporal do Cacau e Produtos", xlab= "Anos", ylab="IPCA")
+plot(zt9,main="Série Temporal do Café", xlab= "Anos", ylab="IPCA")
+plot(zt10,main="Série Temporal da Cebola", xlab= "Anos", ylab="IPCA")
+plot(zt11,main="Série Temporal do Complexo Soja", xlab= "Anos", ylab="IPCA")
+plot(zt12,main="Série Temporal do Complexo Sucroalc.", xlab= "Anos", ylab="IPCA")
 ```
 
 ```{r}
@@ -198,12 +198,12 @@ plot(zt10,main="Série Temporal do Complexo Sucroalc.", xlab= "Anos", ylab="IPCA
 par(mfrow = c(3, 2))
 
 
-plot(zt11,main="Série Temporal do Feijão", xlab= "Anos", ylab="IPCA")
-plot(zt12,main="Série Temporal das Frutas", xlab= "Anos", ylab="IPCA")
-plot(zt13,main="Série Temporal das Horticulas", xlab= "Anos", ylab="IPCA")
-plot(zt14,main="Série Temporal de Indefinido", xlab= "Anos", ylab="IPCA")
-plot(zt15,main="Série Temporal do Lácteos", xlab= "Anos", ylab="IPCA")
-plot(zt16,main="Série Temporal da Laranja e Citrus", xlab= "Anos", ylab="IPCA")
+plot(zt13,main="Série Temporal do Feijão", xlab= "Anos", ylab="IPCA")
+plot(zt14,main="Série Temporal das Frutas", xlab= "Anos", ylab="IPCA")
+plot(zt15,main="Série Temporal das Horticulas", xlab= "Anos", ylab="IPCA")
+plot(zt16,main="Série Temporal de Indefinido", xlab= "Anos", ylab="IPCA")
+plot(zt17,main="Série Temporal do Laranja e Citrus", xlab= "Anos", ylab="IPCA")
+plot(zt18,main="Série Temporal da Lácteos", xlab= "Anos", ylab="IPCA")
 ```
 
 ```{r}
@@ -211,12 +211,12 @@ plot(zt16,main="Série Temporal da Laranja e Citrus", xlab= "Anos", ylab="IPCA")
 par(mfrow = c(3, 2))
 
 
-plot(zt17,main="Série Temporal da Mandioca", xlab= "Anos", ylab="IPCA")
-plot(zt18,main="Série Temporal do Milho", xlab= "Anos", ylab="IPCA")
-plot(zt19,main="Série Temporal do Pescado", xlab= "Anos", ylab="IPCA")
-plot(zt20,main="Série Temporal da Suínocultura", xlab= "Anos", ylab="IPCA")
-plot(zt21,main="Série Temporal do Tomate", xlab= "Anos", ylab="IPCA")
-plot(zt22,main="Série Temporal do Trigo", xlab= "Anos", ylab="IPCA")
+plot(zt19,main="Série Temporal da Mandioca", xlab= "Anos", ylab="IPCA")
+plot(zt20,main="Série Temporal do Milho", xlab= "Anos", ylab="IPCA")
+plot(zt21,main="Série Temporal do Pescado", xlab= "Anos", ylab="IPCA")
+plot(zt22,main="Série Temporal da Suínocultura", xlab= "Anos", ylab="IPCA")
+plot(zt23,main="Série Temporal do Tomate", xlab= "Anos", ylab="IPCA")
+plot(zt24,main="Série Temporal do Trigo", xlab= "Anos", ylab="IPCA")
 ```
 
 
@@ -224,24 +224,24 @@ plot(zt22,main="Série Temporal do Trigo", xlab= "Anos", ylab="IPCA")
 
 ```{r}
 par(mfrow = c(2, 1))
-plot(zt19,main="Série Temporal do Pescado", xlab= "Anos", ylab="IPCA")
-plot(zt15,main="Série Temporal do Lácteos", xlab= "Anos", ylab="IPCA")
+plot(zt21,main="Série Temporal do Pescado", xlab= "Anos", ylab="IPCA")
+plot(zt18,main="Série Temporal do Lácteos", xlab= "Anos", ylab="IPCA")
 #900#650
 ```
 
 
 ```{r}
 par(mfrow = c(2, 1))
-plot(zt5,main="Série Temporal da Bovinocultura", xlab= "Anos", ylab="IPCA")
-plot(zt20,main="Série Temporal da Suínocultura", xlab= "Anos", ylab="IPCA")
+plot(zt7,main="Série Temporal da Bovinocultura", xlab= "Anos", ylab="IPCA")
+plot(zt22,main="Série Temporal da Suínocultura", xlab= "Anos", ylab="IPCA")
 
 ```
 
 
 ```{r}
 par(mfrow = c(2, 1))
-plot(zt1,main="Série Temporal de Avicultura de Corte", xlab= "Anos", ylab="IPCA")
-plot(zt2,main="Série Temporal de Avicultura de Postura", xlab= "Anos", ylab="IPCA")
+plot(zt3,main="Série Temporal de Avicultura de Corte", xlab= "Anos", ylab="IPCA")
+plot(zt4,main="Série Temporal de Avicultura de Postura", xlab= "Anos", ylab="IPCA")
 
 ```
 
@@ -251,42 +251,42 @@ plot(zt2,main="Série Temporal de Avicultura de Postura", xlab= "Anos", ylab="IP
 
 ```{r}
 par(mfrow = c(1, 2))
-acf(zt1, main="ACF Avicultura de Corte")
-pacf(zt1, main="PACF Avicultura de Corte")
+acf(zt3, main="ACF Avicultura de Corte")
+pacf(zt3, main="PACF Avicultura de Corte")
 ```
 
 
 ```{r}
 par(mfrow = c(1, 2))
-acf(zt2, main="ACF Avicultura de Postura")
-pacf(zt2, main="PACF Avicultura de Postura")
+acf(zt4, main="ACF Avicultura de Postura")
+pacf(zt4, main="PACF Avicultura de Postura")
 ```
 
 
 ```{r}
 par(mfrow = c(1, 2))
-acf(zt20, main="ACF Suínocultura")
-pacf(zt20, main="PACF Suínocultura")
+acf(zt22, main="ACF Suínocultura")
+pacf(zt22, main="PACF Suínocultura")
 ```
 
 
 ```{r}
 par(mfrow = c(1, 2))
-acf(zt19, main="ACF Pescado")
-pacf(zt19, main="PACF Pescado")
+acf(zt21, main="ACF Pescado")
+pacf(zt21, main="PACF Pescado")
 ```
 
 ```{r}
 par(mfrow = c(1, 2))
-acf(zt15, main="ACF Lácteos")
-pacf(zt15, main="PACF Lácteos")
+acf(zt18, main="ACF Lácteos")
+pacf(zt18, main="PACF Lácteos")
 ```
 
 
 ```{r}
 par(mfrow = c(1, 2))
-acf(zt5, main="ACF Bovinocultura")
-pacf(zt5, main="PACF Bovinocultura")
+acf(zt7, main="ACF Bovinocultura")
+pacf(zt7, main="PACF Bovinocultura")
 ```
 
 
@@ -302,24 +302,24 @@ pacf(zt5, main="PACF Bovinocultura")
 ```{r}
 #Correlaões cruzadas da Bovincultura
 par(mfrow = c(3,2))
-acf(zt5,main="ACF Bovinocultura")
-ccf(zt5,zt1,main="Bovinocultura e Avicultura de Corte")
-ccf(zt5,zt2,main="Bovinocultura e Avicultura de Postura")
-ccf(zt5,zt15,main="Bovinocultura e Lácteos")
-ccf(zt5,zt19,main="Bovinocultura e Pescados")
-ccf(zt0,zt20,main="Bovinocultura e Suinocultura")
+acf(zt7,main="ACF Bovinocultura")
+ccf(zt7,zt3,main="Bovinocultura e Avicultura de Corte")
+ccf(zt7,zt4,main="Bovinocultura e Avicultura de Postura")
+ccf(zt7,zt18,main="Bovinocultura e Lácteos")
+ccf(zt7,zt21,main="Bovinocultura e Pescados")
+ccf(zt7,zt22,main="Bovinocultura e Suinocultura")
 ```
 
 ```{r}
 
 #Correlações cruzadas da Avicultura de Corte
 par(mfrow = c(3,2))
-acf(zt1,main="ACF Avicultura de Corte")
-ccf(zt1,zt2,main="Avivultura de Corte e Avicultura de Postura")
-ccf(zt1,zt3,main="Avicultura de Corte e Bovinocultura")
-ccf(zt1,zt5,main="Avicultura de Corte e Lácteos")
-ccf(zt1,zt19,main="Avicultura de Corte e Pescados")
-ccf(zt1,zt20,main="Avicultura de Corte e Suinocultura")
+acf(zt3,main="ACF Avicultura de Corte")
+ccf(zt3,zt4,main="Avivultura de Corte e Avicultura de Postura")
+ccf(zt3,zt7,main="Avicultura de Corte e Bovinocultura")
+ccf(zt3,zt18,main="Avicultura de Corte e Lácteos")
+ccf(zt3,zt21,main="Avicultura de Corte e Pescados")
+ccf(zt3,zt22,main="Avicultura de Corte e Suinocultura")
 
 ```
 
@@ -327,46 +327,46 @@ ccf(zt1,zt20,main="Avicultura de Corte e Suinocultura")
 
 #Correlações cruzadas da Avicultura de Postura
 par(mfrow = c(3,2))
-acf(zt2,main="ACF Avicultura de Postura")
-ccf(zt2,zt1,main="Avicultura de Postura e Avicultura de Corte")
-ccf(zt2,zt5,main="Avicultura de Postura e Bovinocultura")
-ccf(zt2,zt15,main="Avicultura de Postura e Lácteos")
-ccf(zt2,zt19,main="Avicultura de Postura e Pescados")
-ccf(zt2,zt20,main="Avicultura de Postura e Suinocultura")
+acf(zt4,main="ACF Avicultura de Postura")
+ccf(zt4,zt4,main="Avicultura de Postura e Avicultura de Corte")
+ccf(zt4,zt7,main="Avicultura de Postura e Bovinocultura")
+ccf(zt4,zt18,main="Avicultura de Postura e Lácteos")
+ccf(zt4,zt21,main="Avicultura de Postura e Pescados")
+ccf(zt4,zt22,main="Avicultura de Postura e Suinocultura")
 ```
 
 ```{r}
 #Correlações cruzadas dos Lácteos
 par(mfrow = c(3,2))
-acf(zt15,main="ACF Lácteos")
-ccf(zt15,zt1,main="Lácteos e Avicultura de Corte")
-ccf(zt15,zt2,main="Lácteos e Avicultura de Postura ")
-ccf(zt15,zt5,main="Lácteos e Bovinocultura")
-ccf(zt15,zt19,main="Lácteos e Pescados")
-ccf(zt15,zt20,main="Lácteos e Suinocultura")
+acf(zt18,main="ACF Lácteos")
+ccf(zt18,zt3,main="Lácteos e Avicultura de Corte")
+ccf(zt18,zt4,main="Lácteos e Avicultura de Postura ")
+ccf(zt18,zt7,main="Lácteos e Bovinocultura")
+ccf(zt18,zt21,main="Lácteos e Pescados")
+ccf(zt18,zt22,main="Lácteos e Suinocultura")
 ```
 
 ```{r}
 # Correlaões cruzadas dos Pescados
 par(mfrow = c(3,2))
-acf(zt19,main="ACF Pescados")
-ccf(zt19,zt1,main="Pescados e Avicultura de Corte")
-ccf(zt19,zt2,main="Pescados e Avicultura de Postura")
-ccf(zt19,zt5,main="Pescados e Bovinocultura")
-ccf(zt19,zt15,main="Pescados e Lácteos")
-ccf(zt19,zt20,main="Pescados e Suinocultura")
+acf(zt21,main="ACF Pescados")
+ccf(zt21,zt3,main="Pescados e Avicultura de Corte")
+ccf(zt21,zt4,main="Pescados e Avicultura de Postura")
+ccf(zt21,zt7,main="Pescados e Bovinocultura")
+ccf(zt21,zt18,main="Pescados e Lácteos")
+ccf(zt21,zt22,main="Pescados e Suinocultura")
 ```
 
 ```{r}
 
 #Correlações cruzadas da Suinocultura
 par(mfrow = c(3,2))
-acf(zt20,main="ACF Suinocultura")
-ccf(zt20,zt1,main="Suinocultura e Avicultura de Corte")
-ccf(zt20,zt2,main="Suinocultura e Avicultura de Postura")
-ccf(zt20,zt5,main="Suinocultura e Bovinocultura")
-ccf(zt20,zt15,main="Suinocultura e Lacteos")
-ccf(zt20,zt19,main="Suinocultura e Pescados")
+acf(zt22,main="ACF Suinocultura")
+ccf(zt22,zt3,main="Suinocultura e Avicultura de Corte")
+ccf(zt22,zt4,main="Suinocultura e Avicultura de Postura")
+ccf(zt22,zt7,main="Suinocultura e Bovinocultura")
+ccf(zt22,zt18,main="Suinocultura e Lacteos")
+ccf(zt22,zt21,main="Suinocultura e Pescados")
 ```
 
 
@@ -390,18 +390,11 @@ combinar = function(df,coluna,nome,lag){
 
 data_cut = data[,c("Bovinocultura","Avicultura de Corte","Avicultura de Postura","Pescado","Lácteos","Suinocultura")]
 
-
-
 df1<- combinar(data_cut, data_cut$`Avicultura de Postura`, 'avp9', 9)
-df1 <- combinar(df1, df1$`Lácteos`, 'l1', 1)
-df1 <- combinar(df1, df1$`Lácteos`, 'l2', 2)
-df1 <- combinar(df1, df1$`Lácteos`, 'l6', 6)
 df1 <- combinar(df1, df1$Pescado, 'p3', 3)
 df1 <- combinar(df1, df1$Pescado, 'p10', 10)
 df1 <- combinar(df1, df1$Bovinocultura, 'b1', 1)
-```
 
-```{r}
 
 df2 <- na.omit(df1)
 ```
@@ -409,12 +402,20 @@ df2 <- na.omit(df1)
 
 # Regressão LASSO
 
+
 ```{r}
 library(glmnet)
-set.seed(123) 
-x <- df2[,]
-x = model.matrix(Bovinocultura~.,x)[,-1]
+x = model.matrix(Bovinocultura~.,df2)[,-1]
 y = df2$Bovinocultura
+
+grid = 10^seq(10,-2, length = 100)
+lasso.mod = glmnet(x,y,alpha = 1)
+plot(lasso.mod, xvar = "norm", label = TRUE)
+```
+
+
+```{r}
+set.seed(123) 
 
 cv.lasso <- cv.glmnet(x, y, alpha = 1, family = "gaussian")
 print(cv.lasso)
@@ -423,21 +424,36 @@ cv.lasso$lambda.min
 cv.lasso$lambda.1se
 coef(cv.lasso, cv.lasso$lambda.min)
 coef(cv.lasso, cv.lasso$lambda.1se)
+
 ```
 
 
 
-# Regressão RIDGE
+
+
+
+
+# Regressão classifica no contexto de Séries Temporais
 
 ```{r}
 set.seed(1234) 
-
-cv.ridge <- cv.glmnet(x, y, alpha = 0, family = "gaussian")
-print(cv.ridge)
-plot(cv.ridge)
-cv.ridge$lambda.min
-cv.ridge$lambda.1se
-coef(cv.ridge, cv.ridge$lambda.min)
-coef(cv.ridge, cv.ridge$lambda.1se)
+summary(fit <- lm(y~x))
 ```
+
+```{r}
+library(astsa)
+acf2(resid(fit))
+```
+
+```{r}
+set.seed(12345) 
+
+fit2 <- sarima(y, 1,0,0, xreg=x)
+fit2
+```
+
+
+
+
+
 
