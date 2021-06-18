@@ -33,7 +33,7 @@ output:
     fig_caption: yes
     number_sections: no
     toc: true
-    toc_depth: 2
+    toc_depth: 4
 editor_options: 
   chunk_output_type: console
 ---
@@ -111,13 +111,18 @@ library(GeneCycle)
 
 
 
-```{r , include=FALSE}
+```{r , include=TRUE}
 library(forecast)
 library(randtests)
 library(zoo)
 library(TSA)
 library(gridExtra)
 library(FitAR)  
+library(glmnet)
+library(islasso)
+library(astsa)
+library(lmtest)
+library(forecast)
 ```
 
 
@@ -126,18 +131,16 @@ setwd("C:\\Users\\Rodrigo Araujo\\Documents\\IME-USP\\CEA 1\\dados")
 ```
 
 
+# Análise das séries temporais mensais
 
-# Análise Descritiva
+## Análise Descritiva
 
-
-
-```{r}
-#setwd("C:\\Users\\Rodrigo Araujo\\Documents\\IME-USP\\CEA 1\\dados")
-#data = read_xlsx("IPCA_DADOS_AGRUPADOS.xlsx", sheet = 1)
-
+```{r, include=FALSE}
 setwd("C:\\Users\\Rodrigo Araujo\\Documents\\IME-USP\\CEA 1\\dados")
 data = read_xlsx("IPCA_DADOS_AGRUPADOS.xlsx", sheet = 1)
+```
 
+```{r}
 data$Data <- as.Date(data$Data)
 head(data)
 ```
@@ -170,6 +173,7 @@ zt23 <- ts(data[,23], frequency = 12, start = 2007, end = 2019)
 zt24 <- ts(data[,24], frequency = 12, start = 2007, end = 2019)
      
 ```
+
 
 ```{r}
 plot(zt2,main="Série Temporal do Arroz", xlab= "Anos", ylab="IPCA")
@@ -247,7 +251,9 @@ plot(zt4,main="Série Temporal de Avicultura de Postura", xlab= "Anos", ylab="IP
 
 
 
-# Funções de Autocorrelações
+## Funções de Autocorrelações
+
+### Funções de Autocorrelações para Avicultura de Corte 
 
 ```{r}
 par(mfrow = c(1, 2))
@@ -255,34 +261,35 @@ acf(zt3, main="ACF Avicultura de Corte")
 pacf(zt3, main="PACF Avicultura de Corte")
 ```
 
-
+### Funções de Autocorrelações para Avicultura de Postura 
 ```{r}
 par(mfrow = c(1, 2))
 acf(zt4, main="ACF Avicultura de Postura")
 pacf(zt4, main="PACF Avicultura de Postura")
 ```
 
-
+### Funções de Autocorrelações para Suinocultura
 ```{r}
 par(mfrow = c(1, 2))
 acf(zt22, main="ACF Suínocultura")
 pacf(zt22, main="PACF Suínocultura")
 ```
 
-
+### Funções de Autocorrelações para Pescado
 ```{r}
 par(mfrow = c(1, 2))
 acf(zt21, main="ACF Pescado")
 pacf(zt21, main="PACF Pescado")
 ```
 
+### Funções de Autocorrelações para Lácteos 
 ```{r}
 par(mfrow = c(1, 2))
 acf(zt18, main="ACF Lácteos")
 pacf(zt18, main="PACF Lácteos")
 ```
 
-
+### Funções de Autocorrelações para Bovinocultura 
 ```{r}
 par(mfrow = c(1, 2))
 acf(zt7, main="ACF Bovinocultura")
@@ -291,13 +298,9 @@ pacf(zt7, main="PACF Bovinocultura")
 
 
 
+## Análise Correlação Cruzada  
 
-
-
-
-# Análise Correlação Cruzada  
-
-
+### Correlaões cruzadas da Bovincultura
 
 ```{r}
 #Correlaões cruzadas da Bovincultura
@@ -310,18 +313,23 @@ ccf(zt7,zt21,main="Bovinocultura e Pescados")
 ccf(zt7,zt22,main="Bovinocultura e Suinocultura")
 ```
 
+
+### Correlações cruzadas da Avicultura de Corte
 ```{r}
 
 #Correlações cruzadas da Avicultura de Corte
 par(mfrow = c(3,2))
 acf(zt3,main="ACF Avicultura de Corte")
-ccf(zt3,zt4,main="Avivultura de Corte e Avicultura de Postura")
+ccf(zt3,zt4,main="Avicultura de Corte e Avicultura de Postura")
 ccf(zt3,zt7,main="Avicultura de Corte e Bovinocultura")
 ccf(zt3,zt18,main="Avicultura de Corte e Lácteos")
 ccf(zt3,zt21,main="Avicultura de Corte e Pescados")
 ccf(zt3,zt22,main="Avicultura de Corte e Suinocultura")
 
 ```
+
+
+### Correlações cruzadas da Avicultura de Postura
 
 ```{r}
 
@@ -335,6 +343,7 @@ ccf(zt4,zt21,main="Avicultura de Postura e Pescados")
 ccf(zt4,zt22,main="Avicultura de Postura e Suinocultura")
 ```
 
+### Correlações cruzadas dos Lácteos
 ```{r}
 #Correlações cruzadas dos Lácteos
 par(mfrow = c(3,2))
@@ -346,6 +355,7 @@ ccf(zt18,zt21,main="Lácteos e Pescados")
 ccf(zt18,zt22,main="Lácteos e Suinocultura")
 ```
 
+### Correlaões cruzadas dos Pescados
 ```{r}
 # Correlaões cruzadas dos Pescados
 par(mfrow = c(3,2))
@@ -356,6 +366,8 @@ ccf(zt21,zt7,main="Pescados e Bovinocultura")
 ccf(zt21,zt18,main="Pescados e Lácteos")
 ccf(zt21,zt22,main="Pescados e Suinocultura")
 ```
+
+### Correlações cruzadas da Suinocultura
 
 ```{r}
 
@@ -370,9 +382,12 @@ ccf(zt22,zt21,main="Suinocultura e Pescados")
 ```
 
 
+## Selecionado as variáveis de interesse do estudo 
+
+Essa função retorna a coluna com a lag a ser considerada na análise
 
 ```{r}
-combinar = function(df,coluna,nome,lag){
+funcao_lags = function(df,coluna,nome,lag){
   n = nrow(df)
   pre = rep(NA,lag)
   newcol = c(pre,coluna)
@@ -385,39 +400,45 @@ combinar = function(df,coluna,nome,lag){
 
 ```
 
+A seguir vamos selecionar apenas as variáveis de interesse para análise
 
+```{r}
+data_cut = data[,c("Bovinocultura","Avicultura de Corte","Avicultura de Postura","Pescado","Lácteos","Suinocultura")]
+```
+
+
+## Modelo da Bovinocultura
+
+### Estruturando a base
 ```{r}
 
 data_cut = data[,c("Bovinocultura","Avicultura de Corte","Avicultura de Postura","Pescado","Lácteos","Suinocultura")]
 
-df1<- combinar(data_cut, data_cut$`Avicultura de Postura`, 'avp9', 9)
-df1 <- combinar(df1, df1$Pescado, 'p3', 3)
-df1 <- combinar(df1, df1$Pescado, 'p10', 10)
-df1 <- combinar(df1, df1$Bovinocultura, 'b1', 1)
+df1<- funcao_lags(data_cut, data_cut$`Avicultura de Postura`, 'avp9', 9)
+df1 <- funcao_lags(df1, df1$Pescado, 'p3', 3)
+df1 <- funcao_lags(df1, df1$Pescado, 'p10', 10)
+df1 <- funcao_lags(df1, df1$Bovinocultura, 'b1', 1)
 
 
 df2 <- na.omit(df1)
 ```
 
-
-# Regressão LASSO
-
-
+Separando variável preditora e as covariáveis 
 ```{r}
-library(glmnet)
 x = model.matrix(Bovinocultura~.,df2)[,-1]
 y = df2$Bovinocultura
-
-grid = 10^seq(10,-2, length = 100)
-lasso.mod = glmnet(x,y,alpha = 1)
-plot(lasso.mod, xvar = "norm", label = TRUE)
 ```
 
 
+
+### Regressão LASSO
+
+A seguir vamos utilizar a biblioteca "glmnet"
+
 ```{r}
 set.seed(123) 
-
 cv.lasso <- cv.glmnet(x, y, alpha = 1, family = "gaussian")
+summary(cv.lasso)
 print(cv.lasso)
 plot(cv.lasso)
 cv.lasso$lambda.min
@@ -427,33 +448,397 @@ coef(cv.lasso, cv.lasso$lambda.1se)
 
 ```
 
+A seguir vamos utilizar a biblioteca "islasso"
+
+```{r}
+
+model.islasso <- islasso(y ~ x, lambda = cv.lasso$lambda.min)
+summary(model.islasso)
+
+```
 
 
 
+### Regressão classifica no contexto de Séries Temporais
 
 
-
-# Regressão classifica no contexto de Séries Temporais
+#### Criando o modelo de Regressão Simples 
 
 ```{r}
 set.seed(1234) 
-summary(fit <- lm(y~x))
+
+fit1 <- summary(fit <- lm(y~x))
+fit1
+
+#write.csv(fit1$coefficients, file = 'tabela_reg.csv')
+
 ```
 
+#### Análise dos Resíduos
+
 ```{r}
-library(astsa)
 acf2(resid(fit))
 ```
+
+
+### Regressão com erros autocorrelacionais
+
+
+#### Criando o modelo de Regressão com erros autocorrelacionados
 
 ```{r}
 set.seed(12345) 
 
-fit2 <- sarima(y, 1,0,0, xreg=x)
+
+fit2 <- sarima(y, 1,0,0, xreg= x)
 fit2
+
+```
+
+#### Análise dos resíduos e seleção de variáveis de acordo com p-valor
+
+```{r}
+fit3 = Arima(y,order=c(1,0,0),xreg=x)
+coeftest(fit3)
+
+#d = diag(fit3$var.coef)**(0.5)
+#t = fit3$coef/d
+#p = 2*pt(-abs(t),144)
+#p
+#max(p)
+
+x = x[,-2]
+fit3 = Arima(y,order=c(1,0,0),xreg=x)
+coeftest(fit3)
+
+
+x = x[,-6]
+fit3 = Arima(y,order=c(1,0,0),xreg=x)
+coeftest(fit3)
+
+
+
+x = x[,-7]
+fit3 = Arima(y,order=c(1,0,0),xreg=x)
+coeftest(fit3)
+
+
+
+x = x[,-3]
+fit3 = Arima(y,order=c(1,0,0),xreg=x)
+coeftest(fit3)
+
+
+
+fit3 = Arima(y,order=c(1,0,0),xreg=x,include.mean = FALSE)
+coeftest(fit3)
+
+x = x[,-2]
+fit3 = Arima(y,order=c(1,0,0),xreg=x,include.mean = FALSE)
+coeftest(fit3)
+
+
+x = x[,-4]
+fit3 = Arima(y,order=c(1,0,0),xreg=x,include.mean = FALSE)
+coeftest(fit3)
+summary(fit3)
+
+checkresiduals(fit3)
+
 ```
 
 
 
 
+## Modelo da Avicultura de Corte
+
+### Estruturando a base
+```{r}
+
+data_cut = data[,c("Bovinocultura","Avicultura de Corte","Avicultura de Postura","Pescado","Lácteos","Suinocultura")]
+
+df1<- funcao_lags(data_cut, data_cut$`Avicultura de Corte`, 'cort1', 1)
+df1 <- funcao_lags(df1, df1$`Avicultura de Postura`, 'pos12', 12)
+df1 <- funcao_lags(df1, df1$Bovinocultura, 'bov1', 1)
+df1 <- funcao_lags(df1, df1$Pescado, 'pes4', 4)
+df1 <- funcao_lags(df1, df1$Pescado, 'pes9', 9)
+df1 <- funcao_lags(df1, df1$Suinocultura, 'sui1', 1)
+df1 <- funcao_lags(df1, df1$Suinocultura, 'sui6', 6)
+
+df2 <- na.omit(df1)
+```
+
+Separando variável preditora e as covariáveis 
+```{r}
+x = model.matrix(`Avicultura de Corte`~.,df2)[,-1]
+y = df2$`Avicultura de Corte`
+```
+
+
+
+### Regressão LASSO
+
+A seguir vamos utilizar a biblioteca "glmnet"
+
+```{r}
+set.seed(123) 
+cv.lasso <- cv.glmnet(x, y, alpha = 1, family = "gaussian")
+summary(cv.lasso)
+print(cv.lasso)
+plot(cv.lasso)
+cv.lasso$lambda.min
+cv.lasso$lambda.1se
+coef(cv.lasso, cv.lasso$lambda.min)
+coef(cv.lasso, cv.lasso$lambda.1se)
+
+```
+
+A seguir vamos utilizar a biblioteca "islasso"
+
+```{r}
+
+model.islasso <- islasso(y ~ x, lambda = cv.lasso$lambda.min)
+summary(model.islasso)
+
+```
+
+
+
+###  Regressão classica no contexto de Séries Temporais
+
+#### Criando o modelo de Regressão Simples 
+
+```{r}
+set.seed(1234) 
+
+fit1 <- summary(fit <- lm(y~x))
+fit1
+
+#write.csv(fit1$coefficients, file = 'tabela_reg.csv')
+
+```
+
+#### Análise dos Resíduos
+
+```{r}
+acf2(resid(fit))
+
+checkresiduals(fit)
+```
+
+#### Seleção de variáveis
+
+```{r}
+set.seed(123) 
+
+fit2 <- summary(fit <- lm(y~x-1))
+fit2
+
+x3 = x[, -11]
+fit3 <- summary(fit <- lm(y~x3-1))
+fit3
+
+x3 = x3[, -9]
+fit3 <- summary(fit <- lm(y~x3-1))
+fit3
+
+x3 = x3[, -8]
+fit3 <- summary(fit <- lm(y~x3-1))
+fit3
+
+
+x3 = x3[, -5]
+fit3 <- summary(fit <- lm(y~x3-1))
+fit3
+
+checkresiduals(fit3)
+```
+
+
+
+# Análise das séries temporais anuais
+
+
+```{r, include=FALSE}
+library(readxl)
+setwd("C:\\Users\\Rodrigo Araujo\\Documents\\IME-USP\\CEA 1\\dados")
+data_anual = read_xlsx("Cadeia-Ano.xlsx")
+```
+
+## Análise Descritiva 
+
+```{r}
+head(data_anual)
+```
+
+
+```{r}
+z_avc = data_anual$`Avicultura de Corte`
+z_avc = ts(z_avc)
+
+z_avp = data_anual$`Avicultura Postura`
+z_avp = ts(z_avp)
+
+z_bov = data_anual$`Bovinocultura de corte`
+z_bov = ts(z_bov)
+
+z_lac = data_anual$`Lácteos`
+z_lac = ts(z_lac)
+
+z_pesc = data_anual$Pescado
+z_pesc = ts(z_pesc)
+
+z_suino = data_anual$Suinocultura
+z_suino = ts(z_suino)
+```
+
+
+## Regressão LASSO
+
+```{r}
+library(glmnet)
+
+colnames(data_anual) = c("ANO", "AVC","AVP","BOV","LAC","PESC","SUIN")
+data_anual = data_anual[,-1]
+```
+
+### Modelo para Bovinocultura
+```{r}
+
+# Bovinocultura
+
+par(mfrow=c(3,2))
+ccf(z_bov,z_avc)
+ccf(z_bov,z_avp)
+ccf(z_bov,z_lac)
+ccf(z_bov,z_pesc)
+ccf(z_bov,z_suino)
+acf(z_bov)
+
+x = model.matrix(BOV~ .,data=data_anual)[,-1]
+y = data_anual$BOV
+
+cv.model = cv.glmnet(x,y,alpha = 1)
+par(mfrow=c(1,1))
+plot(cv.model)
+
+coef(cv.model,cv.model$lambda.min)
+```
+
+### Modelo para o Pescado
+
+```{r}
+
+# Pescados
+
+par(mfrow=c(3,2))
+ccf(z_pesc,z_bov)
+ccf(z_pesc,z_suino)
+ccf(z_pesc,z_avp)
+ccf(z_pesc,z_avc)
+ccf(z_pesc,z_lac)
+acf(z_pesc)
+
+x = model.matrix(PESC~ .,data=data_anual)[,-1]
+y = data_anual$PESC
+
+cv.model = cv.glmnet(x,y,alpha = 1)
+par(mfrow=c(1,1))
+plot(cv.model)
+
+coef(cv.model,cv.model$lambda.min) 
+
+```
+
+### Modelo para a Avicultura de Corte
+```{r}
+# Avicultura de Corte
+
+par(mfrow=c(3,2))
+ccf(z_avc,z_bov)
+ccf(z_avc,z_suino)
+ccf(z_avc,z_avp)
+ccf(z_avc,z_pesc)
+ccf(z_avc,z_lac)
+acf(z_avc)
+
+x = model.matrix(AVC~ .,data=data_anual)[,-1]
+y = data_anual$AVC
+
+cv.model = cv.glmnet(x,y,alpha = 1)
+par(mfrow=c(1,1))
+plot(cv.model)
+
+coef(cv.model,cv.model$lambda.min) 
+```
+
+### Modelo oara Avicultura de Postura
+```{r}
+# Avicultura de Postura
+
+par(mfrow=c(3,2))
+ccf(z_avp,z_bov)
+ccf(z_avp,z_suino)
+ccf(z_avp,z_avc)
+ccf(z_avp,z_pesc)
+ccf(z_avp,z_lac)
+acf(z_avp)
+
+x = model.matrix(AVP~ .,data=data_anual)[,-1]
+y = data_anual$AVP
+
+par(mfrow=c(1,1))
+cv.model = cv.glmnet(x,y,alpha = 1)
+plot(cv.model)
+
+coef(cv.model,cv.model$lambda.min) 
+```
+
+### Modelo para o Lácteos
+
+```{r}
+
+# Lacteos
+
+par(mfrow=c(3,2))
+ccf(z_lac,z_bov)
+ccf(z_lac,z_suino)
+ccf(z_lac,z_avc)
+ccf(z_lac,z_pesc)
+ccf(z_lac,z_avp)
+acf(z_lac)
+
+x = model.matrix(LAC~ .,data=data_anual)[,-1]
+y = data_anual$LAC
+
+par(mfrow=c(1,1))
+cv.model = cv.glmnet(x,y,alpha = 1)
+plot(cv.model)
+
+coef(cv.model,cv.model$lambda.min) 
+
+```
+
+### Modelo para Suinocultura
+```{r}
+# Suinocultura
+
+par(mfrow=c(3,2))
+ccf(z_suino,z_bov)
+ccf(z_suino,z_avp)
+ccf(z_suino,z_avc)
+ccf(z_suino,z_pesc)
+ccf(z_suino,z_lac)
+acf(z_suino)
+
+x = model.matrix(SUIN~ .,data=data_anual)[,-1]
+y = data_anual$SUIN
+
+par(mfrow=c(1,1))
+cv.model = cv.glmnet(x,y,alpha = 1)
+plot(cv.model)
+
+coef(cv.model,cv.model$lambda.min)
+```
 
 

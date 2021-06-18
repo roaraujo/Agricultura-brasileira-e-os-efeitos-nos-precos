@@ -1,0 +1,80 @@
+avicultura de corte:
+
+cort 1
+pos 12
+bov 1 
+pes 4 
+pes 9
+sui 1
+sui 6
+
+avicultura de postura:
+
+pos 1
+pos 11
+pos 12
+cort 1
+cort 12
+bov 3
+lact 11
+pes 2
+pes 3 
+pes 8
+
+Suinocultura:
+
+sui 1
+sui 2
+cort 1
+cort 6
+bov 1
+
+Pescado:
+
+pes 1
+pes 4
+pes 5
+pes 6
+pes 7
+pes 12
+cort 3
+cort 8
+cort 12
+pos 2
+pos 3
+pos 8
+pos 9
+bov 1
+bov 3
+bov 7
+lact 1
+lact 2
+lact 6
+lact 7
+lact 8
+sui 3
+
+Lácteos:
+
+lact 1
+lact 2
+cort 6
+cort 7
+pos 1
+pos 2
+bov 2
+pes 1
+pes 4
+pes 6
+pes 10
+
+
+
+
+
+
+
+
+
+
+
