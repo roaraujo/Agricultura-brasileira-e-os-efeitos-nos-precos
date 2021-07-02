@@ -68,7 +68,6 @@ library(robustbase)
 library(knitr)
 library(stargazer)
 library(tidyverse)
-library(gamlss)
 library(car)
 library(readxl)
 library(MASS)
@@ -106,22 +105,14 @@ library(GeneCycle)
 
 
 ```{r , include=TRUE}
-library(forecast)
 library(randtests)
 library(zoo)
 library(TSA)
 library(gridExtra)
 library(FitAR)  
 library(glmnet)
-library(islasso)
 library(astsa)
 library(lmtest)
-library(forecast)
-```
-
-
-```{r, include=FALSE,eval=FALSE}
-setwd("C:\\Users\\Rodrigo Araujo\\Documents\\IME-USP\\CEA 1\\dados")
 ```
 
 
@@ -130,7 +121,6 @@ setwd("C:\\Users\\Rodrigo Araujo\\Documents\\IME-USP\\CEA 1\\dados")
 ## Análise Descritiva
 
 ```{r, include=FALSE}
-setwd("C:\\Users\\Rodrigo Araujo\\Documents\\IME-USP\\CEA 1\\dados")
 data = read_xlsx("IPCA_DADOS_AGRUPADOS.xlsx", sheet = 1)
 ```
 
@@ -937,7 +927,7 @@ acf2(fit4$residuals, main = "")
 
 ```{r, include=FALSE}
 library(readxl)
-data_anual = read_xlsx("C:\\Users\\Rodrigo Araujo\\Documents\\IME-USP\\CEA 1\\dados\\Cadeia-Ano.xlsx")
+data_anual = read_xlsx("Cadeia-Ano.xlsx")
 ```
 
 ## Análise Descritiva 
