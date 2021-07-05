@@ -991,6 +991,8 @@ z_suino = data_anual$Suinocultura
 z_suino = ts(z_suino, frequency = 1, start = 2007, end = 2019)
 ```
 
+
+
 ```{r, eval=FALSE}
 # Análise Descritiva 
 plot(z_avc,main="Série Temporal da Avicultura de Corte", xlab= "Anos", ylab="IPCA")
@@ -1051,6 +1053,35 @@ acf(z_suino, main="ACF Suinocultura")
 pacf(z_suino, main="PACF Suinocultura")
 ```
 
+
+
+
+## Testes de Dickey-Fuller e Phillips-Perron
+
+Teste de Dickey-Fuller
+```{r, eval=FALSE}
+# Teste de Dickey-Fuller
+adf.test(z_bov)
+adf.test(z_avc)
+adf.test(z_avp)
+adf.test(z_lac)
+adf.test(z_pesc)
+adf.test(z_suino)
+
+```
+
+
+Teste de Phillips-Perron
+```{r, eval=FALSE}
+# Teste de Phillips-Perron
+pp.test(z_bov)
+pp.test(z_avc)
+pp.test(z_avp)
+pp.test(z_lac)
+pp.test(z_pesc)
+pp.test(z_suino)
+
+```
 
 
 

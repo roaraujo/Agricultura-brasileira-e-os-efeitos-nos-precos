@@ -1051,6 +1051,37 @@ pacf(z_suino, main="PACF Suinocultura")
 
 
 
+## Testes de Dickey-Fuller e Phillips-Perron
+
+Teste de Dickey-Fuller
+```{r}
+# Teste de Dickey-Fuller
+adf.test(z_bov)
+adf.test(z_avc)
+adf.test(z_avp)
+adf.test(z_lac)
+adf.test(z_pesc)
+adf.test(z_suino)
+
+```
+
+
+Teste de Phillips-Perron
+```{r}
+# Teste de Phillips-Perron
+pp.test(z_bov)
+pp.test(z_avc)
+pp.test(z_avp)
+pp.test(z_lac)
+pp.test(z_pesc)
+pp.test(z_suino)
+
+```
+
+
+
+
+
 Definindo variáveis do modelo
 ```{r}
 # Variáveis do modelo
