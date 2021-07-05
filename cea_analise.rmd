@@ -286,6 +286,35 @@ pacf(zt7, main="PACF Bovinocultura")
 ```
 
 
+## Testes de Dickey-Fuller e Phillips-Perron
+
+
+Teste de Dickey-Fuller
+```{r, include = TRUE}
+# Teste de Dickey-Fuller
+adf.test(zt7)
+adf.test(zt3)
+adf.test(zt4)
+adf.test(zt18)
+adf.test(zt21)
+adf.test(zt22)
+
+```
+
+
+Teste de Phillips-Perron
+```{r, include = TRUE}
+# Teste de Phillips-Perron
+pp.test(zt7)
+pp.test(zt3)
+pp.test(zt4)
+pp.test(zt18)
+pp.test(zt21)
+pp.test(zt22)
+
+```
+
+
 
 ## Análise Correlação Cruzada  
 
@@ -941,33 +970,83 @@ head(data_anual)
 ```{r}
 # Análise Descritiva 
 z_avc = data_anual$`Avicultura de Corte`
-z_avc = ts(z_avc)
+z_avc = ts(z_avc, frequency = 1, start = 2007, end = 2019)
 
 z_avp = data_anual$`Avicultura Postura`
-z_avp = ts(z_avp)
+z_avp = ts(z_avp, frequency = 1, start = 2007, end = 2019)
 
 z_bov = data_anual$`Bovinocultura de corte`
-z_bov = ts(z_bov)
+z_bov = ts(z_bov, frequency = 1, start = 2007, end = 2019)
 
 z_lac = data_anual$`Lácteos`
-z_lac = ts(z_lac)
+z_lac = ts(z_lac, frequency = 1, start = 2007, end = 2019)
 
 z_pesc = data_anual$Pescado
-z_pesc = ts(z_pesc)
+z_pesc = ts(z_pesc, frequency = 1, start = 2007, end = 2019)
 
 z_suino = data_anual$Suinocultura
-z_suino = ts(z_suino)
+z_suino = ts(z_suino, frequency = 1, start = 2007, end = 2019)
 ```
+
 
 ```{r}
 # Análise Descritiva 
-par(mfrow = c(3,2))
 plot(z_avc,main="Série Temporal da Avicultura de Corte", xlab= "Anos", ylab="IPCA")
 plot(z_avp,main="Série Temporal da Avicultura de Postura", xlab= "Anos", ylab="IPCA")
 plot(z_lac,main="Série Temporal do Lácteos", xlab= "Anos", ylab="IPCA")
 plot(z_pesc,main="Série Temporal do Pescado", xlab= "Anos", ylab="IPCA")
 plot(z_bov,main="Série Temporal da Bovinocultura", xlab= "Anos", ylab="IPCA")
 plot(z_suino,main="Série Temporal da Suinocultura", xlab= "Anos", ylab="IPCA")
+```
+
+
+Funções de Autocorrelações para Bovinocultura 
+```{r}
+#Funções de Autocorrelações para Bovinocultura 
+par(mfrow = c(1, 2))
+acf(z_bov, main="ACF Bovinocultura")
+pacf(z_bov, main="PACF Bovinocultura")
+```
+
+Funções de Autocorrelações para Avicultura de Corte
+```{r}
+#Funções de Autocorrelações para Avicultura de Corte 
+par(mfrow = c(1, 2))
+acf(z_avc, main="ACF Avicultura de Corte")
+pacf(z_avc, main="PACF Avicultura de Corte")
+```
+
+Funções de Autocorrelações para Avicultura de Postura
+```{r}
+#Funções de Autocorrelações para Avicultura de Postura
+par(mfrow = c(1, 2))
+acf(z_avp, main="ACF Avicultura de Postura")
+pacf(z_avp, main="PACF Avicultura de Postura")
+```
+
+
+Funções de Autocorrelações para Lácteos
+```{r}
+#Funções de Autocorrelações para Lácteos
+par(mfrow = c(1, 2))
+acf(z_lac, main="ACF Lácteos")
+pacf(z_lac, main="PACF Lácteos")
+```
+
+Funções de Autocorrelações para Pescado
+```{r}
+#Funções de Autocorrelações para Pescado 
+par(mfrow = c(1, 2))
+acf(z_pesc, main="ACF Pescado")
+pacf(z_pesc, main="PACF Pescado")
+```
+
+Funções de Autocorrelações para Suinocultura
+```{r}
+#Funções de Autocorrelações para Suinocultura 
+par(mfrow = c(1, 2))
+acf(z_suino, main="ACF Suinocultura")
+pacf(z_suino, main="PACF Suinocultura")
 ```
 
 
@@ -993,9 +1072,10 @@ ccf(z_bov,z_avp,main="Bovinocultura e Avicultura de Postura")
 ccf(z_bov,z_lac,main="Bovinocultura e Lácteos")
 ccf(z_bov,z_pesc,main="Bovinocultura e Pescado")
 ccf(z_bov,z_suino,main="Bovinocultura e Suinocultura")
-acf(z_bov, main = "ACF da Bovinocultura")
+
 
 # Regressão LASSO
+set.seed(1)
 x = model.matrix(BOV~ .,data=data_anual)[,-1]
 y = data_anual$BOV
 
@@ -1020,9 +1100,10 @@ ccf(z_pesc,z_avp,main="Pescado e Avicultura de Postura")
 ccf(z_pesc,z_bov,main="Pescado e Bovinocultura")
 ccf(z_pesc,z_lac,main="Pescado e Lácteos")
 ccf(z_pesc,z_suino,main="Pescado e Suinocultura")
-acf(z_pesc, main = "ACF do Pescado")
 
-# Regressão Lasso 
+
+# Regressão LASSO
+set.seed(2) 
 x = model.matrix(PESC~ .,data=data_anual)[,-1]
 y = data_anual$PESC
 
@@ -1045,10 +1126,10 @@ ccf(z_avc,z_bov,main="Avicultura de Corte e Bovinocultura")
 ccf(z_avc,z_lac,main="Avicultura de Corte e Lácteos")
 ccf(z_avc,z_pesc,main="Avicultura de Corte e Pescado")
 ccf(z_avc,z_suino,main="Avicultura de Corte e Suinocultura")
-acf(z_avc, main = "ACF da Avicultura de Corte")
 
-## Regressão Lasso 
 
+# Regressão LASSO
+set.seed(3)
 x = model.matrix(AVC~ .,data=data_anual)[,-1]
 y = data_anual$AVC
 
@@ -1070,10 +1151,10 @@ ccf(z_avp,z_bov,main="Avicultura de Postura e Bovinocultura")
 ccf(z_avp,z_lac,main="Avicultura de Postura e Lácteos")
 ccf(z_avp,z_pesc,main="Avicultura de Postura e Pescado")
 ccf(z_avp,z_suino,main="Avicultura de Postura e Suinocultura")
-acf(z_avp, main = "ACF Avicultura de Postura")
 
 
-# Regressão Lasso 
+# Regressão LASSO
+set.seed(4) 
 x = model.matrix(AVP~ .,data=data_anual)[,-1]
 y = data_anual$AVP
 
@@ -1096,9 +1177,10 @@ ccf(z_lac,z_avp,main="Lácteos e Avicultura de Postura")
 ccf(z_lac,z_bov,main="Lácteos e Bovinocultura")
 ccf(z_lac,z_pesc,main="Lácteos e Pescado")
 ccf(z_lac,z_suino,main="Lácteos e Suinocultura")
-acf(z_lac, main = "ACF do Lácteos")
 
-# Regressão Lasso 
+
+# Regressão LASSO
+set.seed(5)
 x = model.matrix(LAC~ .,data=data_anual)[,-1]
 y = data_anual$LAC
 
@@ -1122,9 +1204,10 @@ ccf(z_suino,z_avp,main="Suinocultura e Avicultura de Postura")
 ccf(z_suino,z_bov,main="Suinocultura e Bovinocultura")
 ccf(z_suino,z_lac,main="Suinocultura e Lacteos")
 ccf(z_suino,z_pesc,main="Suinocultura e Pescado")
-acf(z_suino, main = "ACF da Suinocultura")
 
-# Regressão Lasso para
+
+# Regressão LASSO
+set.seed(6)
 x = model.matrix(SUIN~ .,data=data_anual)[,-1]
 y = data_anual$SUIN
 
