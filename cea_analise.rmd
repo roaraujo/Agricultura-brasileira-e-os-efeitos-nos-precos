@@ -292,12 +292,12 @@ pacf(zt7, main="PACF Bovinocultura")
 Teste de Dickey-Fuller
 ```{r, include = TRUE}
 # Teste de Dickey-Fuller
-adf.test(zt7)
-adf.test(zt3)
-adf.test(zt4)
-adf.test(zt18)
-adf.test(zt21)
-adf.test(zt22)
+adf.test(zt7) # Bovinocultura
+adf.test(zt3) # Avicultura de Corte
+adf.test(zt4) # Avicultura de Postura
+adf.test(zt18) # Lácteos
+adf.test(zt21) # Pescado
+adf.test(zt22) # Suínocultura
 
 ```
 
@@ -305,12 +305,12 @@ adf.test(zt22)
 Teste de Phillips-Perron
 ```{r, include = TRUE}
 # Teste de Phillips-Perron
-pp.test(zt7)
-pp.test(zt3)
-pp.test(zt4)
-pp.test(zt18)
-pp.test(zt21)
-pp.test(zt22)
+pp.test(zt7) # Bovinocultura
+pp.test(zt3) # Avicultura de Corte
+pp.test(zt4) # Avicultura de Postura
+pp.test(zt18) # Lácteos
+pp.test(zt21) # Pescado
+pp.test(zt22) # Suínocultura
 
 ```
 
@@ -519,6 +519,7 @@ xx<- xx[[1]]
 
 
 fit6 = Arima(y,order=c(1,0,0),xreg=xx,fixed=c(NA,NA, NA, NA))
+fit6
 cof.fit6 = coeftest(fit6)
 cof.fit6
 checkresiduals(fit6)
@@ -724,11 +725,12 @@ coeftest(fit3)
 
 x = x[,-2]
 fit3 = Arima(y,order=c(0,0,0), seasonal = c(1, 0, 0),xreg=x)
+fit3
 coeftest(fit3)
 
 checkresiduals(fit3)
 acf2(fit3$residuals, main = "")
-S
+
 
 
 ```
@@ -867,6 +869,7 @@ xx<- xx[[1]]
 
 
 fit3 = Arima(y,order=c(0,0,0),xreg=xx,include.mean = FALSE)
+fit3
 coeftest(fit3)
 checkresiduals(fit3)
 acf2(fit3$residuals, main = "")

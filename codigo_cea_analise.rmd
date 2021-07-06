@@ -291,15 +291,16 @@ pacf(zt7, main="PACF Bovinocultura")
 
 ## Testes de Dickey-Fuller e Phillips-Perron
 
+
 Teste de Dickey-Fuller
 ```{r, eval=FALSE}
 # Teste de Dickey-Fuller
-adf.test(zt7)
-adf.test(zt3)
-adf.test(zt4)
-adf.test(zt18)
-adf.test(zt21)
-adf.test(zt22)
+adf.test(zt7) # Bovinocultura
+adf.test(zt3) # Avicultura de Corte
+adf.test(zt4) # Avicultura de Postura
+adf.test(zt18) # Lácteos
+adf.test(zt21) # Pescado
+adf.test(zt22) # Suínocultura
 
 ```
 
@@ -307,14 +308,14 @@ adf.test(zt22)
 Teste de Phillips-Perron
 ```{r, eval=FALSE}
 # Teste de Phillips-Perron
-pp.test(zt7)
-pp.test(zt3)
-pp.test(zt4)
-pp.test(zt18)
-pp.test(zt21)
-pp.test(zt22)
-
+pp.test(zt7) # Bovinocultura
+pp.test(zt3) # Avicultura de Corte
+pp.test(zt4) # Avicultura de Postura
+pp.test(zt18) # Lácteos
+pp.test(zt21) # Pescado
+pp.test(zt22) # Suínocultura
 ```
+
 
 
 
